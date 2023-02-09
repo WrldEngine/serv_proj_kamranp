@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ user.username }}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="on3">
+        <img src="{{ url_for('static', filename='/1640528661_1-abrakadabra-fun-p-serii-chelovek-na-avu-1.png') }}" alt="">
+        <div class="on4">
+            <label>
+                <span class="personal">{{ user.id }}</span>
+                <p class="personal">{{ user.username }}</p>
+                <p class="personal">{{ user.fullname }}</p>
+                {% if isAuthor or isAdmin %}
+                    <p class="personal">{{ user.phone }}</p>
+                    <p class="personal">{{ user.password }}</p>
+                {% endif %}
+            </label>
+        </div>
+    </div>
+</body>
+</html>

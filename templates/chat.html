@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chat</title>
+</head>
+<body>
+    <center>
+	<form method="post">
+	        <textarea type="text", name="message_content", placeholder="Enter message"></textarea>
+                <button>Submit</button>
+	</form>
+    </center>
+    <div>
+        {% for msg_object in msg_chat %}
+            <strong>{{ msg_object.msg_author }}: {{ msg_object.msg_content }}</strong><br/>
+        {% endfor %}
+    </div>
+</body>
+</html>

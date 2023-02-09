@@ -1,0 +1,201 @@
+@font-face {
+	font-family: 'FontName'; 
+	src: url('mr_VlaShu VlaShu:Version 1.00'); 
+}
+
+body{
+    background-color: rgb(167, 164, 164);
+}
+
+.on1{
+    margin: auto;
+    background-color: rgb(229, 229, 229);
+    max-width: 400px;
+    margin-top: 180px;
+    font-family:Arial, Helvetica, sans-serif ;
+    border-radius: 20px; 
+    border: solid;
+}
+
+.on1 h1{
+    text-align: center;
+    padding-top: 10px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.on2{
+    text-align: center;
+    margin-top: 30px;
+}
+
+#on4{
+    border: none;
+    font-family:Verdana, Geneva, Tahoma, sans-serif ;
+    border-style: ridge;
+    max-width: 350px;
+    box-sizing: border-box;
+    font-family: inherit; /* 1 */
+    font-size: inherit; /* 1 */
+    line-height: inherit; /* 1 */
+    margin: 10px; /* 2 */
+    margin-bottom: 20px;
+    line-height: 20px;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    display: block;
+    margin-bottom: 0.25rem;
+    display: block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #bdbdbd;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    margin: auto;
+}
+
+#on3{
+    border: none;
+    font-family:Verdana, Geneva, Tahoma, sans-serif ;
+    box-sizing: border-box;
+    font-family: inherit; /* 1 */
+    font-size: inherit; /* 1 */
+    /* line-height: inherit; 1 */
+    margin: 10px; /* 2 */
+    /* line-height: 10px; */
+    border-radius: 10px;
+    /* display: block;
+    display: block; */
+    width: 70px;
+    /* height: calc(2.25rem + 2px); */
+    /* padding: 0.375rem 0.75rem; */
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #bdbdbd;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.on5 img{
+    max-width: 150px;
+}
+
+.on6 {
+    color: gainsboro;
+
+}
+
+.on5{
+    display: flex;
+    gap: 50px;
+    background-color: gray;
+    border: solid gainsboro;
+    margin-top: 50px;
+    margin-left: 20px;
+    width:500px;
+    margin-top: 100px;
+}
+
+.on7 img{
+    max-width: 150px;
+}
+
+.on8 {
+    color: gainsboro;
+    margin-top: 20px;
+}
+
+.on7{
+    display: flex;
+    gap: 30px;
+    background-color: gray;
+    border: solid gainsboro;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 300px;
+    max-width: auto;
+}
+
+.on9 img{
+    max-width: 150px;
+}
+
+.on9 {
+    padding: 100px;
+    display: flex;
+    gap: 40px;
+}
+
+.on9 h1{
+    color: gray;
+}
+
+.on10 {
+    margin-top: 33px;
+    display: flex;
+    gap: 30px;
+}
+
+.on11{
+    display: flex;
+    gap: 50px;
+    margin: auto;
+}
+
+@media (max-width:600px){
+    .on9{
+        padding: 10px;
+    }
+
+    .on9 img{
+        display: none;
+    }
+
+    .on11 h1{
+        display: none;
+    }
+
+    .on10{
+        display: none;
+    }
+
+    body{
+        padding: 0;
+    }
+
+    .on5{
+        max-width: 250px;
+        margin: auto;
+        margin-bottom: 2rem;
+        display: flex;
+        gap: 10px;
+    }
+
+}
+
+.on13{
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+@media (max-width:6000px){
+    #on12{
+        display: none;
+    }
+}

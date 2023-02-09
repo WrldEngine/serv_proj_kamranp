@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mediana it academy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    {% for client in clients_list %}
+    <div class="on13">
+        <div class="on5">
+            <img src="{{ url_for('static', filename='/1640528661_1-abrakadabra-fun-p-serii-chelovek-na-avu-1.png') }}" alt="">
+            <div class="on6">
+                <p>id: {{ client.id }}</p>
+                <p>Name: {{ client.username }}</p>
+                {% if this_acc == 'admin' %}
+                    <p>Phone number: {{ client.phone }}</p>
+                    <span>Password: {{ client.password }}</span>
+                    <form action="/send/{{ client.id }}", method="post">
+                        <input type="submit", value="accept">
+                    </form>
+                {% endif %}
+                <a href="/space/{{ client.id }}/{{ client.username }}">LINK</a>
+            </div>
+        </div>
+     </div>
+     {% endfor %}
+</body>
+</html>
