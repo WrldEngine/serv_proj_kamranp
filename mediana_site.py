@@ -138,17 +138,18 @@ def send_email(id):
 
     return "Access denied | Отказ доступа"
 
-@app.route('/stat')
+@app.route('admin/stat')
 def show_statistic():
-    class social_media:
-        instagram = stat_rec.get_to_media('instagram')
-        facebook = stat_rec.get_to_media('facebook')
-        telegram = stat_rec.get_to_media('telegram')
+    if session['name'] == 'admin':
+        class social_media:
+            instagram = stat_rec.get_to_media('instagram')
+            facebook = stat_rec.get_to_media('facebook')
+            telegram = stat_rec.get_to_media('telegram')
 
-    soc_objects = social_media()
-    return render_template('stat.html', soc_objects=soc_objects)
+        soc_objects = social_media()
+        return render_template('stat.html', soc_objects=soc_objects)
 
-@app.route('/chats')
+@app.route('admin/chats')
 def chats():
     if session['name'] == 'admin':
         chats = Chat_rooms.query.all()
