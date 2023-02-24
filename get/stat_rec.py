@@ -12,3 +12,9 @@ def get_to_media(filename):
     file = open(f'get/{filename}.txt', 'r')
     stat_show = file.read()
     return stat_show
+
+def reset(filename):
+    reset_value = 0
+
+    file = open(f'get/{filename}.txt', 'w')
+    file.write(str(reset_value))

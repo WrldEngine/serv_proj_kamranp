@@ -53,11 +53,10 @@ def main_page():
     
     return redirect("/reg")
 
-@app.route("/reg/<soc>/")
 @app.route("/reg", methods=['GET', 'POST'])
-def reg_page(soc=None):
-    if not soc is None:
-        stat_rec.set_to_media(soc)
+def reg_page():
+    if social_service := request.args.get('from'):
+        stat_rec.set_to_media(social_service)
         return redirect('/reg')
 
     if request.method == "POST":
@@ -138,24 +137,31 @@ def send_email(id):
 
     return "Access denied | Отказ доступа"
 
-@app.route('admin/stat')
-def show_statistic():
-    if session['name'] == 'admin':
-        class social_media:
-            instagram = stat_rec.get_to_media('instagram')
-            facebook = stat_rec.get_to_media('facebook')
-            telegram = stat_rec.get_to_media('telegram')
+@app.route('/admin')
+def admin_panel():
+    if 'name' in session:
+        if session['name'] == ADMIN_CONF_NAME:
+            query = request.args.get('query')
 
-        soc_objects = social_media()
-        return render_template('stat.html', soc_objects=soc_objects)
+            if (reset := request.args.get('reset')) == 'True':
+                stat_rec.reset('instagram')
+                stat_rec.reset('facebook')
+                stat_rec.reset('telegram')
 
-@app.route('admin/chats')
-def chats():
-    if session['name'] == 'admin':
-        chats = Chat_rooms.query.all()
-        return render_template('chats.html', rooms=chats)
+                return redirect('/admin?query=stat')
 
-    return redirect('/')
+            if query == 'chats':
+                chats = Chat_rooms.query.all()
+                return render_template('chats.html', rooms=chats)
+
+            if query == 'stat':
+                instagram = stat_rec.get_to_media('instagram')
+                facebook = stat_rec.get_to_media('facebook')
+                telegram = stat_rec.get_to_media('telegram')
+
+                return render_template('stat.html', instagram=instagram, facebook=facebook, telegram=telegram)
+
+    return "ACCESS DENIED ERROR"
 
 @app.route('/chat/<username>', methods=['POST', 'GET'])
 def chat(username):
@@ -215,4 +221,4 @@ if __name__ == "__main__":
     with app.app_context():
         db.create_all()
         set_adm()
-        app.run(host='0.0.0.0', port=8000)
+        app.run(host='localhost', port=8000)
