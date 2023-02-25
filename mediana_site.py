@@ -1,47 +1,18 @@
 from flask import Flask
-from flask import redirect, render_template, request, url_for
-from flask import session
-from flask_socketio import SocketIO, send, emit
+from flask import redirect, render_template, request, url_for, session
+from flask_sqlalchemy import SQLAlchemy
+from conf import *
 
 from get import stat_rec
+from tables import db, Client, Messages, Chat_rooms, set_adm
 
 import send_message_email
 import datetime
-
-from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///management.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = '27adc9f91f3245bcb28fa0adbfbcd4f8'
-
-ADMIN_CONF_NAME = "admin"
-ADMIN_CONF_PASSWORD = "hashpassw"
-ADMIN_CONF_EMAIL = "noemail@noserv.com"
-ADMIN_CONF_PHONE = 1111
-ADMIN_CONF_FULL_NAME = "ADMINISTRATION of MEDIANA"
-
-class Client(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    fullname = db.Column(db.String)
-    username = db.Column(db.String, unique=True, nullable=False)
-    phone = db.Column(db.Integer)
-    password = db.Column(db.String)
-
-    def __repr__(self, id):
-        return '<Client %r>' % self.id
-
-class Messages(db.Model):
-    id = db.Column(db.Integer(), primary_key=True)
-    msg_author = db.Column(db.String())
-    msg_content = db.Column(db.Text())
-    chat_room = db.Column(db.String())
-
-class Chat_rooms(db.Model):
-    id = db.Column(db.Integer(), primary_key=True)
-    msg_author = db.Column(db.String())
 
 @app.route("/")
 @app.route("/main")
@@ -143,7 +114,7 @@ def admin_panel():
         if session['name'] == ADMIN_CONF_NAME:
             query = request.args.get('query')
 
-            if (reset := request.args.get('reset')) == 'True':
+            if query == 'reset_stat':
                 stat_rec.reset('instagram')
                 stat_rec.reset('facebook')
                 stat_rec.reset('telegram')
@@ -202,22 +173,7 @@ def logout_page():
         return "you dont have account"
 
 if __name__ == "__main__":
-    def set_adm():
-        USERNAME_CHECKER = Client.query.filter(Client.username == ADMIN_CONF_NAME).all()
-        PASSWORD_CHECKER = Client.query.filter(Client.password == ADMIN_CONF_PASSWORD).all()
-
-        if not USERNAME_CHECKER and not PASSWORD_CHECKER:
-            set_admin = Client(
-                username=ADMIN_CONF_NAME,
-                fullname=ADMIN_CONF_FULL_NAME,
-                phone=ADMIN_CONF_PHONE, 
-                password=ADMIN_CONF_PASSWORD
-            )
-            db.session.add(set_admin)
-            db.session.commit()
-
     db.init_app(app)
-
     with app.app_context():
         db.create_all()
         set_adm()
