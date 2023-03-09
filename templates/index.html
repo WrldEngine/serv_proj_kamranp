@@ -9,23 +9,23 @@
 </head>
 <body>
     {% for client in clients_list %}
-    <div class="on13">
-        <div class="on5">
-            <img src="" alt="">
-            <div class="on6">
-                <p>id: {{ client.id }}</p>
-                <p>Name: {{ client.username }}</p>
-                {% if this_acc == 'admin' %}
-                    <p>Phone number: {{ client.phone }}</p>
-                    <span>Password: {{ client.password }}</span>
-                    <form action="/send/{{ client.id }}", method="post">
-                        <input type="submit", value="accept">
-                    </form>
-                {% endif %}
-                <a href="/space/{{ client.id }}/{{ client.username }}">LINK</a>
+        <div class="on13">
+            <div class="on5">
+                <img src="" alt="">
+                <div class="on6">
+                    <p>id: {{ client.id }}</p>
+                    <p>Name: {{ client.username }}</p>
+                    {% if this_acc == 'admin' %}
+                        <p>Phone number: {{ client.phone }}</p>
+                        <span>Password: {{ client.password }}</span>
+                        <form action="/send/{{ client.id }}", method="post">
+                            <input type="submit", value="accept">
+                        </form>
+                    {% endif %}
+                    <a href="/space/{{ client.id }}/{{ client.username }}">LINK</a>
+                </div>
             </div>
-        </div>
-     </div>
+         </div>
      {% endfor %}
 </body>
 </html>
