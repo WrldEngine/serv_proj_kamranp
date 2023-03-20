@@ -11,6 +11,7 @@ class Client(db.Model):
     username = db.Column(db.String, unique=True, nullable=False)
     phone = db.Column(db.Integer)
     password = db.Column(db.String)
+    photo_name = db.Column(db.String, default='default.jpg')
 
     def __repr__(self, id):
         return '<Client %r>' % self.id

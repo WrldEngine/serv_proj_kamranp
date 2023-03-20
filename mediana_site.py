@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import redirect, render_template, request, url_for, session
+from flask import redirect, render_template, request, url_for, session, make_response
 from flask_sqlalchemy import SQLAlchemy
 from conf import *
 
@@ -13,6 +13,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///management.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = '27adc9f91f3245bcb28fa0adbfbcd4f8'
+app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
 
 @app.route("/")
 @app.route("/main")
@@ -163,7 +164,27 @@ def chat(username):
         
         chat = Messages.query.filter(Messages.chat_room == username)
         return render_template('chat.html', msg_chat=chat)
-    
+
+@app.route("/upload", methods=['POST', 'GET'])
+def upload():
+    if session['name']:
+        if request.method == 'POST':
+            photo = request.files['photo']
+            if photo:
+                img_content = photo.read()
+                img_contentType = photo.filename.split('.')[1]
+
+                profile_update = Client.query.filter_by(username=session['name']).first()
+
+                with open(f'static/us_pr_pic/{profile_update.id}.{img_contentType}', 'wb') as set_pr_photo:
+                    set_pr_photo.write(img_content)
+                    set_pr_photo.close()
+
+                profile_update.photo_name = f'{profile_update.id}.{img_contentType}'
+                db.session.commit()
+
+                return "OK"
+
 @app.route("/logout")
 def logout_page():
     if 'name' in session:
