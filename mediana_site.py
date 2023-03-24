@@ -169,8 +169,7 @@ def chat(username):
 def upload():
     if session['name']:
         if request.method == 'POST':
-            photo = request.files['photo']
-            if photo:
+            if photo := request.files['photo']:
                 img_content = photo.read()
                 img_contentType = photo.filename.split('.')[1]
 
